@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: aliceblue;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+}
