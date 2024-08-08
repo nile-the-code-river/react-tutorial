@@ -9,7 +9,7 @@ export default function AddProject({
     title: "",
     description: "",
     dueDate: "",
-    task: {},
+    task: [],
   });
 
   function handleTitleChange(event) {
@@ -18,7 +18,7 @@ export default function AddProject({
         title: event.target.value,
         description: prevProject.description,
         dueDate: prevProject.dueDate,
-        task: {},
+        task: [],
       };
     });
   }
@@ -29,7 +29,7 @@ export default function AddProject({
         title: prevProject.title,
         description: event.target.value,
         dueDate: prevProject.dueDate,
-        task: {},
+        task: [],
       };
     });
   }
@@ -40,7 +40,7 @@ export default function AddProject({
         title: prevProject.title,
         description: prevProject.description,
         dueDate: event.target.value,
-        task: {},
+        task: [],
       };
     });
   }
@@ -53,7 +53,6 @@ export default function AddProject({
           // type="submit"
           onClick={() => {
             onAddProject(project);
-            onNavigateToProjectDetail(project);
           }}
         >
           Save

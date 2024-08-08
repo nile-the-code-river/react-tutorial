@@ -9,7 +9,7 @@ const pages = ["noProject", "addProject", "projectDetail"];
 
 function App() {
   const [mainPageContent, setMainPageContent] = useState(pages[0]);
-  const [selectedProject, setSelectedProject] = useState();
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState();
   const ref = useRef();
 
   function handleNavigateToAddProject() {
@@ -18,11 +18,29 @@ function App() {
 
   function handleNavigateToProjectDetail(project) {
     setMainPageContent(() => pages[2]);
-    setSelectedProject(() => project);
+
+    if (project != null) {
+      setSelectedProjectIndex(() =>
+        ref.current.getProjects().findIndex((x) => x.title === project.title)
+      );
+    }
+  }
+
+  function handleNavigateToNoProject() {
+    setMainPageContent(() => pages[0]);
   }
 
   function AddProjectToSideBar(project) {
     ref.current.addToProject(project);
+  }
+  function handleAddTask(project, task) {
+    ref.current.addTask(project, task);
+  }
+  function handleDeleteTask(project, task) {
+    ref.current.deleteTask(project, task);
+  }
+  function handleDeleteProject(project) {
+    ref.current.deleteProject(project);
   }
 
   return (
@@ -44,7 +62,14 @@ function App() {
             />
           )}
           {mainPageContent === pages[2] && (
-            <ProjectDetail project={selectedProject} />
+            <ProjectDetail
+              projects={ref.current.getProjects()}
+              selectedProjectIndex={selectedProjectIndex}
+              onNavigateToNoProject={handleNavigateToNoProject}
+              onDeleteProject={handleDeleteProject}
+              onDeleteTask={handleDeleteTask}
+              onAddTask={handleAddTask}
+            />
           )}
         </div>
       </div>

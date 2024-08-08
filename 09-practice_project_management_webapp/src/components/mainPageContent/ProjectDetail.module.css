@@ -1,10 +1,9 @@
-projectDetailContainer h1 {
+.projectDetailContainer h1 {
   margin: 0px;
 }
 
-projectDetailContainer p {
+.projectDetailContainer p {
   margin: 15px 0;
-  font-size: 18px;
 }
 
 .titleContainer {
@@ -33,12 +32,12 @@ projectDetailContainer p {
 }
 
 .date {
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
 }
 
 .inputTask {
-  padding: 10px 0;
+  padding: 10px;
   width: 250px;
 
   border-width: 0;

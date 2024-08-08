@@ -5,29 +5,56 @@ const SideBar = forwardRef(function (
   { onNavigateToAddProject, onNavigateToProjectDetail },
   ref
 ) {
-  const [projects, setProjects] = useState([
-    {
-      title: "dummy1-title",
-      description: "dummy1-desc",
-      dueDate: "dummy1-date",
-      task: ["d1-task1", "d1-task2", "d1-task3"],
-    },
-    {
-      title:
-        "this-is-some-long-dummy2-title this-is-some-long-dummy2-title this-is-some-long-dummy2-title",
-      description: "dummy2-desc",
-      dueDate: "dummy2-date",
-      task: ["d2-task1", "d2-task2", "d2-task3"],
-    },
-  ]);
+  const [projects, setProjects] = useState([]);
 
-  // ref
   useImperativeHandle(ref, () => {
     return {
+      getProjects() {
+        return projects;
+      },
       addToProject(project) {
+        console.log("add project called");
         setProjects((prevProjects) => [...prevProjects, project]);
+      },
+      addTask(project, task) {
+        setProjects((prevProjects) => {
+          // increase the project number damn
+          // const prevTasks = prevProjects.find(
+          //   (x) => x.title === project.title
+          // ).task;
 
-        console.log("2 " + { ...projects.map((x) => console.log(x)) });
+          const projectIndex = prevProjects.findIndex(
+            (x) => x.title === project.title
+          );
+
+          // const prevTask = prevProjects[projectIndex].task;
+
+          const updatedProject = {
+            ...prevProjects[projectIndex],
+            task: ["asdf", task],
+          };
+
+          console.log(prevProjects.forEach((x) => console.log(x)));
+          console.log("asdasdasdasdasdasdsad : " + task);
+
+          return [
+            // ...prevProjects.slice(0, projectIndex),
+            updatedProject,
+            // ...prevProjects.slice(projectIndex + 1),
+          ];
+        });
+      },
+      deleteTask(project, task) {
+        setProjects((prevProjects) => {
+          return prevProjects
+            .find((x) => x.title === project.title)
+            .filter((x) => x.task != task);
+        });
+      },
+      deleteProject(project) {
+        setProjects((prevProjects) => {
+          return prevProjects.filter((x) => x.title != project.title);
+        });
       },
     };
   });
@@ -38,14 +65,17 @@ const SideBar = forwardRef(function (
       <button onClick={onNavigateToAddProject}>+ Add Project</button>
       {projects && (
         <ol className={styles.projectList}>
+          {console.log(projects.length)}
+          {projects.map((x) => console.log("uwan " + x.title))}
           {projects.map((item) => (
-            <li key={item.title}>
+            <li key={item.title + Date.now()}>
               <button
-                onClick={() =>
+                onClick={() => {
+                  console.log("onclick called");
                   onNavigateToProjectDetail(
                     projects.find((x) => x.title === item.title)
-                  )
-                }
+                  );
+                }}
               >
                 {item.title}
               </button>

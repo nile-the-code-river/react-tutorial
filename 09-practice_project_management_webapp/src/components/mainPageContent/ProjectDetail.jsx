@@ -1,26 +1,62 @@
 import styles from "./ProjectDetail.module.css";
+import { useState } from "react";
 
-export default function ProjectDetail({ project }) {
+export default function ProjectDetail({
+  projects,
+  selectedProjectIndex,
+  onNavigateToNoProject,
+  onDeleteProject,
+  onAddTask,
+  onDeleteTask,
+}) {
+  const [newTask, setNewTask] = useState();
+
+  function handleNewTaskChange(event) {
+    setNewTask(() => event.target.value);
+  }
+
   return (
     <div className={styles.projectDetailContainer}>
       <div className={styles.titleContainer}>
-        <h1 className={styles.title}>{project.title}</h1>
-        <button className="negativeButton">Delete</button>
+        <h1 className={styles.title}>{projects[selectedProjectIndex].title}</h1>
+        <button
+          onClick={() => {
+            onDeleteProject(projects[selectedProjectIndex]);
+            onNavigateToNoProject();
+          }}
+          className="negativeButton"
+        >
+          Delete
+        </button>
       </div>
-      <p className={styles.date}>{project.dueDate}</p>
-      <p>{project.description}</p>
+      <p className={styles.date}>{projects[selectedProjectIndex].dueDate}</p>
+      <p>{projects[selectedProjectIndex].description}</p>
       <hr />
       <h1>Tasks</h1>
       <div>
-        <input type="text" className={styles.inputTask} />
-        <button className="negativeButton">Add Task</button>
+        <input
+          type="text"
+          className={styles.inputTask}
+          onChange={handleNewTaskChange}
+        />
+        <button
+          onClick={() => onAddTask(projects[selectedProjectIndex], newTask)}
+          className="negativeButton"
+        >
+          Add Task
+        </button>
       </div>
-      {project.task.length > 0 && (
+      {projects[selectedProjectIndex].task.length > 0 && (
         <ol>
-          {project.task.map((x) => (
+          {projects[selectedProjectIndex].task.map((x) => (
             <li key={x}>
               <span>{x}</span>
-              <button className="negativeButton">Clear</button>
+              <button
+                onClick={() => onDeleteTask(projects[selectedProjectIndex], x)}
+                className="negativeButton"
+              >
+                Clear
+              </button>
             </li>
           ))}
         </ol>
