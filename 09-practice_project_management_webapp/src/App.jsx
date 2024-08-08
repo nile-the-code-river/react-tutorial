@@ -2,23 +2,47 @@ import { useState } from "react";
 
 import SideBar from "./components/SideBar";
 import NoProject from "./components/mainPageContent/NoProject";
+import AddProject from "./components/mainPageContent/AddProject";
+import ProjectDetail from "./components/mainPageContent/ProjectDetail";
+
+const pages = ["noProject", "addProject", "projectDetail"];
 
 function App() {
-  const [mainPageContent, setMainPageContent] = useState(<NoProject />);
+  const [mainPageContent, setMainPageContent] = useState(pages[0]);
 
-  function handleChangeMainPageContent(newPage) {
-    setMainPageContent((prevContent) => {
-      return newPage;
-    });
+  function handleNavigateToAddProject() {
+    setMainPageContent((prevContent) => pages[1]);
   }
 
-  function handleAddProject() {}
+  function handleNavigateToProjectDetail({
+    title,
+    description,
+    dueDate,
+    tasks,
+  }) {
+    setMainPageContent((prevContent) => pages[2]);
+  }
 
   return (
     <>
       <div className="mainContainer">
-        <SideBar onNavigate={handleChangeMainPageContent} />
-        <div>{mainPageContent}</div>
+        <SideBar
+          onNavigateToAddProject={handleNavigateToAddProject}
+          onNavigateToProjectDetail={handleNavigateToProjectDetail}
+        />
+        <div>
+          {mainPageContent === pages[0] && (
+            <NoProject onNavigateToAddProject={handleNavigateToAddProject} />
+          )}
+          {mainPageContent === pages[1] && (
+            <AddProject
+              onNavigateToProjectDetail={handleNavigateToProjectDetail}
+            />
+          )}
+          {mainPageContent === pages[2] && (
+            <ProjectDetail gottagettheparameter="" />
+          )}
+        </div>
       </div>
     </>
   );

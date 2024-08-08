@@ -1,6 +1,5 @@
 import styles from "./Sidebar.module.css";
 import AddProject from "./mainPageContent/AddProject";
-import NoProject from "./mainPageContent/NoProject";
 
 const projects = [];
 
@@ -18,17 +17,28 @@ function addDummyProjects() {
   });
 }
 
-export default function SideBar({ onAddProject }) {
+export default function SideBar({
+  onNavigateToAddProject,
+  onNavigateToProjectDetail,
+}) {
   if (projects.length === 0) addDummyProjects();
 
   return (
     <nav className={styles.sideBar}>
       <h3>YOUR PROJECTS</h3>
-      <button onClick={onAddProject}>+ Add Project</button>
+      <button onClick={onNavigateToAddProject}>+ Add Project</button>
       <ol className={styles.projectList}>
         {projects.map((project) => (
-          <li key={project.title + project.dueDate}>
-            <button>{project.title}</button>
+          <li key={project.title}>
+            <button
+              onClick={() =>
+                onNavigateToProjectDetail(
+                  projects.find((x) => x.title === project.title)
+                )
+              }
+            >
+              {project.title}
+            </button>
           </li>
         ))}
       </ol>
