@@ -1,47 +1,57 @@
 import styles from "./Sidebar.module.css";
-import AddProject from "./mainPageContent/AddProject";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
-const projects = [];
+const SideBar = forwardRef(function (
+  { onNavigateToAddProject, onNavigateToProjectDetail },
+  ref
+) {
+  const [projects, setProjects] = useState([
+    {
+      title: "dummy1-title",
+      description: "dummy1-desc",
+      dueDate: "dummy1-date",
+    },
+    {
+      title: "this-is-some-long-dummy2-title",
+      description: "dummy2-desc",
+      dueDate: "dummy2-date",
+    },
+  ]);
 
-function addDummyProjects() {
-  projects.push({
-    title: "dummy1-title",
-    description: "dummy1-desc",
-    dueDate: "dummy1-date",
+  // ref
+  useImperativeHandle(ref, () => {
+    return {
+      addToProject(project) {
+        setProjects((prevProjects) => [...prevProjects, project]);
+
+        console.log("2 " + { ...projects.map((x) => console.log(x)) });
+      },
+    };
   });
-
-  projects.push({
-    title: "this-is-some-long-dummy2-title",
-    description: "dummy2-desc",
-    dueDate: "dummy2-date",
-  });
-}
-
-export default function SideBar({
-  onNavigateToAddProject,
-  onNavigateToProjectDetail,
-}) {
-  if (projects.length === 0) addDummyProjects();
 
   return (
     <nav className={styles.sideBar}>
       <h3>YOUR PROJECTS</h3>
       <button onClick={onNavigateToAddProject}>+ Add Project</button>
-      <ol className={styles.projectList}>
-        {projects.map((project) => (
-          <li key={project.title}>
-            <button
-              onClick={() =>
-                onNavigateToProjectDetail(
-                  projects.find((x) => x.title === project.title)
-                )
-              }
-            >
-              {project.title}
-            </button>
-          </li>
-        ))}
-      </ol>
+      {projects && (
+        <ol className={styles.projectList}>
+          {projects.map((item) => (
+            <li key={item.title}>
+              <button
+                onClick={() =>
+                  onNavigateToProjectDetail(
+                    projects.find((x) => x.title === item.title)
+                  )
+                }
+              >
+                {item.title}
+              </button>
+            </li>
+          ))}
+        </ol>
+      )}
     </nav>
   );
-}
+});
+
+export default SideBar;

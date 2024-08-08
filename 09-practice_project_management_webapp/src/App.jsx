@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import SideBar from "./components/SideBar";
 import NoProject from "./components/mainPageContent/NoProject";
@@ -9,24 +9,26 @@ const pages = ["noProject", "addProject", "projectDetail"];
 
 function App() {
   const [mainPageContent, setMainPageContent] = useState(pages[0]);
+  const ref = useRef();
 
   function handleNavigateToAddProject() {
     setMainPageContent((prevContent) => pages[1]);
   }
 
-  function handleNavigateToProjectDetail({
-    title,
-    description,
-    dueDate,
-    tasks,
-  }) {
+  function handleNavigateToProjectDetail(project) {
+    AddProjectToSideBar(project);
     setMainPageContent((prevContent) => pages[2]);
+  }
+
+  function AddProjectToSideBar(project) {
+    ref.current.addToProject(project);
   }
 
   return (
     <>
       <div className="mainContainer">
         <SideBar
+          ref={ref}
           onNavigateToAddProject={handleNavigateToAddProject}
           onNavigateToProjectDetail={handleNavigateToProjectDetail}
         />
