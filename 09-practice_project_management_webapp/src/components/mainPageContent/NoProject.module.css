@@ -1,6 +1,39 @@
 .general {
-  margin: auto;
+  margin: 200px auto 0 auto;
   justify-content: center;
-  text-decoration: underline;
   text-align: center;
+}
+
+.general img {
+  width: 100px;
+}
+
+.general h2 {
+  color: rgb(92, 92, 92);
+  font-weight: 900;
+}
+
+.general p {
+  color: gray;
+}
+
+.general button {
+  font-size: 14px;
+
+  padding: 13px 16px;
+  margin: 25px;
+
+  border-width: 0;
+  border-radius: 5px;
+
+  color: rgb(170, 170, 170);
+  background-color: rgb(54, 54, 54);
+
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.general button:hover {
+  color: rgb(233, 233, 233);
+  opacity: 0.85;
+  cursor: pointer;
 }

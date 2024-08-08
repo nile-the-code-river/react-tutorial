@@ -1,10 +1,15 @@
 import styles from "./NoProject.module.css";
 
-export default function NoProject() {
+export default function NoProject({ onCreateProject }) {
   return (
     <div className={styles.general}>
-      <h1>NoProject</h1>
-      <p>asdasdasd</p>
+      <img
+        src="../../../src/assets/no-projects.png"
+        alt="no-project-available"
+      />
+      <h2>No Project Selected</h2>
+      <p>Select a project or get started with a new one</p>
+      <button onClick={onCreateProject}>Create new project</button>
     </div>
   );
 }
