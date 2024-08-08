@@ -12,11 +12,13 @@ function App() {
     });
   }
 
+  function handleAddProject() {}
+
   return (
     <>
       <div className="mainContainer">
         <SideBar onNavigate={handleChangeMainPageContent} />
-        {mainPageContent}
+        <div>{mainPageContent}</div>
       </div>
     </>
   );
