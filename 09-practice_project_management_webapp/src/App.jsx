@@ -30,7 +30,7 @@ function App() {
           onNavigateToAddProject={handleNavigateToAddProject}
           onNavigateToProjectDetail={handleNavigateToProjectDetail}
         />
-        <div>
+        <div className="mainPageContainer">
           {mainPageContent === pages[0] && (
             <NoProject onNavigateToAddProject={handleNavigateToAddProject} />
           )}

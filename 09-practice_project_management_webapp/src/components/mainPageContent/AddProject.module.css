@@ -1,0 +1,44 @@
+.buttonContainer {
+  text-align: right;
+}
+
+.buttonContainer button {
+}
+
+.cancelButton {
+  background-color: transparent;
+  color: rgb(20, 20, 20);
+}
+
+.inputFields div {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: rgb(80, 80, 80);
+}
+
+.inputFields * {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.inputFields input,
+textarea {
+  font-size: 16px;
+
+  width: 100%;
+  padding: 10px;
+  border-width: 0;
+
+  background-color: rgb(219, 219, 219);
+
+  resize: vertical;
+}
+
+.inputFields input:focus,
+textarea:focus {
+  box-shadow: 0 2px 0 rgb(97, 97, 97);
+
+  outline: none;
+
+  background-color: rgb(197, 197, 197);
+}

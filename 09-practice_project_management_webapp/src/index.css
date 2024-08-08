@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 0px;
   background-color: rgb(245, 245, 245);
 }
 
@@ -14,6 +14,10 @@ body {
 
 .mainContainer div {
   width: 100%;
+}
+
+.mainPageContainer {
+  margin: 70px 150px 70px 50px;
 }
 
 button {
