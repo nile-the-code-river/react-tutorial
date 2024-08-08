@@ -10,11 +10,14 @@ const SideBar = forwardRef(function (
       title: "dummy1-title",
       description: "dummy1-desc",
       dueDate: "dummy1-date",
+      task: ["d1-task1", "d1-task2", "d1-task3"],
     },
     {
-      title: "this-is-some-long-dummy2-title",
+      title:
+        "this-is-some-long-dummy2-title this-is-some-long-dummy2-title this-is-some-long-dummy2-title",
       description: "dummy2-desc",
       dueDate: "dummy2-date",
+      task: ["d2-task1", "d2-task2", "d2-task3"],
     },
   ]);
 

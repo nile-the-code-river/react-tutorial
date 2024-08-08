@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styles from "./AddProject.module.css";
 
-export default function AddProject({ onNavigateToProjectDetail }) {
+export default function AddProject({
+  onNavigateToProjectDetail,
+  onAddProject,
+}) {
   const [project, setProject] = useState({
     title: "",
     description: "",
@@ -45,11 +48,11 @@ export default function AddProject({ onNavigateToProjectDetail }) {
   return (
     <div>
       <div className={styles.buttonContainer}>
-        <button className={styles.cancelButton}>Cancel</button>
+        <button className="negativeButton">Cancel</button>
         <button
           // type="submit"
           onClick={() => {
-            console.log(project);
+            onAddProject(project);
             onNavigateToProjectDetail(project);
           }}
         >

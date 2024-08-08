@@ -2,6 +2,11 @@
   font-family: Roboto, Arial;
 }
 
+hr {
+  margin: 25px 0;
+  border-width: 2px 0 0 0;
+}
+
 body {
   margin: 0px;
   background-color: rgb(245, 245, 245);
@@ -38,5 +43,15 @@ button {
 button:hover {
   color: rgb(233, 233, 233);
   opacity: 0.85;
+  cursor: pointer;
+}
+
+.negativeButton {
+  background-color: transparent;
+  color: rgb(20, 20, 20);
+}
+
+.negativeButton:hover {
+  color: black;
   cursor: pointer;
 }

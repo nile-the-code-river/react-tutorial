@@ -9,15 +9,16 @@ const pages = ["noProject", "addProject", "projectDetail"];
 
 function App() {
   const [mainPageContent, setMainPageContent] = useState(pages[0]);
+  const [selectedProject, setSelectedProject] = useState();
   const ref = useRef();
 
   function handleNavigateToAddProject() {
-    setMainPageContent((prevContent) => pages[1]);
+    setMainPageContent(() => pages[1]);
   }
 
   function handleNavigateToProjectDetail(project) {
-    AddProjectToSideBar(project);
-    setMainPageContent((prevContent) => pages[2]);
+    setMainPageContent(() => pages[2]);
+    setSelectedProject(() => project);
   }
 
   function AddProjectToSideBar(project) {
@@ -39,10 +40,11 @@ function App() {
           {mainPageContent === pages[1] && (
             <AddProject
               onNavigateToProjectDetail={handleNavigateToProjectDetail}
+              onAddProject={AddProjectToSideBar}
             />
           )}
           {mainPageContent === pages[2] && (
-            <ProjectDetail gottagettheparameter="" />
+            <ProjectDetail project={selectedProject} />
           )}
         </div>
       </div>
