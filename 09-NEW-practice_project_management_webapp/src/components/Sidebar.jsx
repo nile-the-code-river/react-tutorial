@@ -1,6 +1,6 @@
 export default function Sidebar({ onClickNewProject }) {
   return (
-    <aside className="bg-stone-800 py-10 pl-5 pr-12 mt-7 rounded-tr-xl w-1/3 md:w-72">
+    <aside className="bg-stone-800 py-10 pl-5 pr-12 mt-7 rounded-tr-xl h-screen w-1/3 md:w-72">
       <p className="font-semibold text-gray-50 md:text-lg mb-4">
         YOUR PROJECTS
       </p>

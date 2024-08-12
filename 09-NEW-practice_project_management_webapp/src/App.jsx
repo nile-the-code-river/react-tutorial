@@ -10,6 +10,7 @@ function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
 
   console.log(projectState);
@@ -24,18 +25,35 @@ function App() {
   }
 
   function handleSubmitNewProject(projectData) {
+    const rndId = Math.random(1000);
+
+    const newProject = {
+      ...projectData,
+      id: rndId,
+    };
+
     setProjectState((prevState) => {
-      const rndId = Math.random(1000);
-
-      const newProject = {
-        ...projectData,
-        id: rndId,
-      };
-
       return {
         ...prevState,
         selectedProjectId: newProject.id,
         projects: [...prevState.projects, newProject],
+      };
+    });
+  }
+
+  function handleAddNewTask(taskTitle) {
+    const rndId = Math.random(1000);
+
+    const newTask = {
+      title: taskTitle,
+      id: rndId,
+      projectId: projectState.selectedProjectId,
+    };
+
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks, newTask],
       };
     });
   }
@@ -52,9 +70,13 @@ function App() {
       {projectState.selectedProjectId != undefined &&
         projectState.selectedProjectId != null && (
           <ProjectPage
-            data={projectState.projects.find(
+            project={projectState.projects.find(
               (x) => x.id == projectState.selectedProjectId
             )}
+            tasks={projectState.tasks.filter(
+              (x) => x.projectId == projectState.selectedProjectId
+            )}
+            onAddNewTask={handleAddNewTask}
           />
         )}
     </main>
