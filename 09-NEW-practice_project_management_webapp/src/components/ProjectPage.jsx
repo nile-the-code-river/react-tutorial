@@ -4,7 +4,7 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
   const { title, description, dueDate } = project;
   const taskInputRef = useRef();
 
-  function HandleSubmitNewTask() {
+  function handleSubmitNewTask() {
     onAddNewTask(taskInputRef.current.value);
     taskInputRef.current.value = "";
   }
@@ -13,26 +13,12 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
     <div className="my-7 md:my-14 md:mx-10 w-2/3">
       <div className="flex mb-3 items-center">
         <h1 className="text-xl md:text-3xl font-bold text-stone-800 overflow-hidden">
-          {title} asdasdasdasdasdasdasdasds
-          asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-          sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
+          {title}
         </h1>
         <button className="ml-auto hover:text-red-600 p-3">Delete</button>
       </div>
       <p className="mb-5 text-stone-500">{dueDate}</p>
-      <p className="mb-10 text-slate-700">
-        {description} asdasdasdasdasdasdasdasds
-        asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-        sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
-        asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-        sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
-        asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-        sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
-        asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-        sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
-        asdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsada
-        sdasasdasdasdasdasdasdasdasdsadasdasasdasdasdasdasdasdasdasdsadasdas
-      </p>
+      <p className="mb-10 text-slate-700">{description}</p>
       <hr />
       <h3 className="mt-5 mb-3 text-lg md:text-2xl font-semibold self-center">
         Tasks
@@ -44,7 +30,7 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
         />
         <button
           className="p-3 ml-1 self-center hover:text-red-600"
-          onClick={HandleSubmitNewTask}
+          onClick={handleSubmitNewTask}
         >
           Add
         </button>

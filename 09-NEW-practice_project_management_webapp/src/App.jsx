@@ -24,6 +24,15 @@ function App() {
     });
   }
 
+  function handleShowProjectPage(projectId) {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: projectId,
+      };
+    });
+  }
+
   function handleSubmitNewProject(projectData) {
     const rndId = Math.random(1000);
 
@@ -60,7 +69,12 @@ function App() {
 
   return (
     <main className="flex h-screen gap-3">
-      <Sidebar onClickNewProject={handleAddNewProject} />
+      <Sidebar
+        onClickNewProject={handleAddNewProject}
+        selectedProjectId={projectState.selectedProjectId}
+        projects={projectState.projects}
+        onHandleShowProjectPage={handleShowProjectPage}
+      />
       {projectState.selectedProjectId === undefined && (
         <NoProjectSelected onClickNewProject={handleAddNewProject} />
       )}
