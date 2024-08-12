@@ -4,7 +4,7 @@ import Input from "./Input";
 import Button from "./Button";
 import TransparentButton from "./TransparentButton";
 
-export default function NewProject({ onSubmitNewProject }) {
+export default function NewProject({ onSubmitNewProject, onNavigateTo }) {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -25,7 +25,9 @@ export default function NewProject({ onSubmitNewProject }) {
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <TransparentButton>Cancel</TransparentButton>
+          <TransparentButton onClick={() => onNavigateTo(undefined)}>
+            Cancel
+          </TransparentButton>
         </li>
         <li>
           <Button onClick={handleClickSave}>Save</Button>

@@ -13,22 +13,11 @@ function App() {
     tasks: [],
   });
 
-  console.log(projectState);
-
-  function handleAddNewProject() {
+  function handleNavigateTo(destId) {
     setProjectState((prevState) => {
       return {
         ...prevState,
-        selectedProjectId: null,
-      };
-    });
-  }
-
-  function handleShowProjectPage(projectId) {
-    setProjectState((prevState) => {
-      return {
-        ...prevState,
-        selectedProjectId: projectId,
+        selectedProjectId: destId,
       };
     });
   }
@@ -44,7 +33,7 @@ function App() {
     setProjectState((prevState) => {
       return {
         ...prevState,
-        selectedProjectId: newProject.id,
+        selectedProjectId: newProject.id, // go to the project page
         projects: [...prevState.projects, newProject],
       };
     });
@@ -54,7 +43,6 @@ function App() {
     setProjectState((prevState) => {
       return {
         ...prevState,
-        selectedProjectId: undefined,
         projects: [...prevState.projects.filter((x) => x.id != projectId)],
       };
     });
@@ -89,16 +77,18 @@ function App() {
   return (
     <main className="flex h-screen gap-3">
       <Sidebar
-        onClickNewProject={handleAddNewProject}
         selectedProjectId={projectState.selectedProjectId}
         projects={projectState.projects}
-        onHandleShowProjectPage={handleShowProjectPage}
+        onNavigateTo={handleNavigateTo}
       />
       {projectState.selectedProjectId === undefined && (
-        <NoProjectSelected onClickNewProject={handleAddNewProject} />
+        <NoProjectSelected onNavigateTo={handleNavigateTo} />
       )}
       {projectState.selectedProjectId === null && (
-        <NewProject onSubmitNewProject={handleSubmitNewProject} />
+        <NewProject
+          onSubmitNewProject={handleSubmitNewProject}
+          onNavigateTo={handleNavigateTo}
+        />
       )}
       {projectState.selectedProjectId != undefined &&
         projectState.selectedProjectId != null && (
@@ -112,6 +102,7 @@ function App() {
             onDeleteProject={handleDeleteProject}
             onAddNewTask={handleAddNewTask}
             onDeleteTask={handleDeleteTask}
+            onNavigateTo={handleNavigateTo}
           />
         )}
     </main>

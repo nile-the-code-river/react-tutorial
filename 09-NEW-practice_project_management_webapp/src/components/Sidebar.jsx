@@ -1,9 +1,4 @@
-export default function Sidebar({
-  onClickNewProject,
-  selectedProjectId,
-  projects,
-  onHandleShowProjectPage,
-}) {
+export default function Sidebar({ selectedProjectId, projects, onNavigateTo }) {
   const classes = "px-1 py-3 hover:text-stone-50";
 
   return (
@@ -13,7 +8,7 @@ export default function Sidebar({
       </p>
       <button
         className=" py-2 px-4 mb-3 bg-stone-700 text-stone-200 rounded-md text-xs md:text-base hover:text-stone-50"
-        onClick={onClickNewProject}
+        onClick={() => onNavigateTo(null)}
       >
         + Add Project
       </button>
@@ -23,7 +18,7 @@ export default function Sidebar({
           {projects.map((x) => (
             <li key={x.id}>
               <button
-                onClick={() => onHandleShowProjectPage(x.id)}
+                onClick={() => onNavigateTo(x.id)}
                 className={
                   classes +
                   (x.id === selectedProjectId

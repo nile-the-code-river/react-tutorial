@@ -8,6 +8,7 @@ export default function ProjectPage({
   onDeleteProject,
   onAddNewTask,
   onDeleteTask,
+  onNavigateTo,
 }) {
   console.log(tasks);
 
@@ -19,13 +20,18 @@ export default function ProjectPage({
     taskInputRef.current.value = "";
   }
 
+  function handleDeleteProject() {
+    onDeleteProject(id);
+    onNavigateTo(undefined);
+  }
+
   return (
     <div className="my-7 md:my-14 md:mx-10 w-2/3">
       <div className="flex mb-3 items-center">
         <h1 className="text-xl md:text-3xl font-bold text-stone-800 overflow-hidden">
           {title}
         </h1>
-        <TransparentButton onClick={() => onDeleteProject(id)}>
+        <TransparentButton onClick={handleDeleteProject}>
           Delete
         </TransparentButton>
       </div>

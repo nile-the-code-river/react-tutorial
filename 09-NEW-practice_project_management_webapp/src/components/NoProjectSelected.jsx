@@ -1,7 +1,7 @@
 import noProjectImage from "../assets/no-projects.png";
 import Button from "./Button";
 
-export default function NoProjectSelected({ onClickNewProject }) {
+export default function NoProjectSelected({ onNavigateTo }) {
   return (
     <div className="mt-24 text-center w-2/3">
       <img
@@ -17,9 +17,7 @@ export default function NoProjectSelected({ onClickNewProject }) {
         Select a project a get started with a new one
       </p>
       <p>
-        <Button onClick={onClickNewProject} test="true">
-          Create New Project
-        </Button>
+        <Button onClick={() => onNavigateTo(null)}>Create New Project</Button>
       </p>
     </div>
   );
