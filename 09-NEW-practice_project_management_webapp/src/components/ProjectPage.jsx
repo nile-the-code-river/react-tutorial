@@ -9,6 +9,7 @@ export default function ProjectPage({
   onAddNewTask,
   onDeleteTask,
   onNavigateTo,
+  onOpenErrorModal,
 }) {
   console.log(tasks);
 
@@ -16,8 +17,14 @@ export default function ProjectPage({
   const taskInputRef = useRef();
 
   function handleSubmitNewTask() {
-    onAddNewTask(taskInputRef.current.value);
-    taskInputRef.current.value = "";
+    const enteredTask = taskInputRef.current.value;
+
+    if (enteredTask === "") {
+      onOpenErrorModal();
+    } else {
+      onAddNewTask();
+      taskInputRef.current.value = "";
+    }
   }
 
   function handleDeleteProject() {

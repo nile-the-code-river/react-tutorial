@@ -4,7 +4,11 @@ import Input from "./Input";
 import Button from "./Button";
 import TransparentButton from "./TransparentButton";
 
-export default function NewProject({ onSubmitNewProject, onNavigateTo }) {
+export default function NewProject({
+  onSubmitNewProject,
+  onNavigateTo,
+  onOpenErrorModal,
+}) {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -16,9 +20,15 @@ export default function NewProject({ onSubmitNewProject, onNavigateTo }) {
       dueDate: dueDate.current.value,
     };
 
-    // validation...
-
-    onSubmitNewProject(input);
+    if (
+      input.title === "" ||
+      input.description === "" ||
+      input.dueDate === ""
+    ) {
+      onOpenErrorModal();
+    } else {
+      onSubmitNewProject(input);
+    }
   }
 
   return (

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import NoProjectSelected from "./components/NoProjectSelected";
 import NewProject from "./components/NewProject";
@@ -6,12 +7,16 @@ import ProjectPage from "./components/ProjectPage";
 
 import Sidebar from "./components/Sidebar";
 
+import Modal from "./components/Modal";
+
 function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
     projects: [],
     tasks: [],
   });
+
+  const modalRef = useRef();
 
   function handleNavigateTo(destId) {
     setProjectState((prevState) => {
@@ -74,38 +79,51 @@ function App() {
     });
   }
 
+  function handleOpenErrorModal() {
+    modalRef.current.open();
+  }
+
   return (
-    <main className="flex h-screen gap-3">
-      <Sidebar
-        selectedProjectId={projectState.selectedProjectId}
-        projects={projectState.projects}
-        onNavigateTo={handleNavigateTo}
-      />
-      {projectState.selectedProjectId === undefined && (
-        <NoProjectSelected onNavigateTo={handleNavigateTo} />
+    <>
+      {createPortal(
+        <Modal ref={modalRef} />,
+        document.getElementById("modal-root")
       )}
-      {projectState.selectedProjectId === null && (
-        <NewProject
-          onSubmitNewProject={handleSubmitNewProject}
+
+      <main className="flex h-screen gap-3">
+        <Sidebar
+          selectedProjectId={projectState.selectedProjectId}
+          projects={projectState.projects}
           onNavigateTo={handleNavigateTo}
         />
-      )}
-      {projectState.selectedProjectId != undefined &&
-        projectState.selectedProjectId != null && (
-          <ProjectPage
-            project={projectState.projects.find(
-              (x) => x.id == projectState.selectedProjectId
-            )}
-            tasks={projectState.tasks.filter(
-              (x) => x.projectId == projectState.selectedProjectId
-            )}
-            onDeleteProject={handleDeleteProject}
-            onAddNewTask={handleAddNewTask}
-            onDeleteTask={handleDeleteTask}
+        {projectState.selectedProjectId === undefined && (
+          <NoProjectSelected onNavigateTo={handleNavigateTo} />
+        )}
+        {projectState.selectedProjectId === null && (
+          <NewProject
+            onSubmitNewProject={handleSubmitNewProject}
             onNavigateTo={handleNavigateTo}
+            onOpenErrorModal={handleOpenErrorModal}
           />
         )}
-    </main>
+        {projectState.selectedProjectId != undefined &&
+          projectState.selectedProjectId != null && (
+            <ProjectPage
+              project={projectState.projects.find(
+                (x) => x.id == projectState.selectedProjectId
+              )}
+              tasks={projectState.tasks.filter(
+                (x) => x.projectId == projectState.selectedProjectId
+              )}
+              onDeleteProject={handleDeleteProject}
+              onAddNewTask={handleAddNewTask}
+              onDeleteTask={handleDeleteTask}
+              onNavigateTo={handleNavigateTo}
+              onOpenErrorModal={handleOpenErrorModal}
+            />
+          )}
+      </main>
+    </>
   );
 }
 
