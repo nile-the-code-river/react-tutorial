@@ -33,7 +33,7 @@ export default function ProjectPage({
   }
 
   return (
-    <div className="my-7 md:my-14 md:mx-10 w-2/3">
+    <div className="my-7 md:my-14 md:mx-10 w-3/5">
       <div className="flex mb-3 items-center">
         <h1 className="text-xl md:text-3xl font-bold text-stone-800 overflow-hidden">
           {title}
@@ -50,7 +50,7 @@ export default function ProjectPage({
       </h3>
       <div className="flex object-center">
         <input
-          className=" px-3 bg-stone-200 border-b-2 w-1/3 focus:outline-none focus:border-stone-400"
+          className=" px-3 bg-stone-200 border-b-2 md:w-1/3 focus:outline-none focus:border-stone-400"
           ref={taskInputRef}
         />
         <button

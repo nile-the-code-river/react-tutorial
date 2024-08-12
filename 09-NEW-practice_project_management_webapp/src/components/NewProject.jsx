@@ -32,7 +32,7 @@ export default function NewProject({
   }
 
   return (
-    <div className="w-[35rem] mt-16">
+    <div className="my-7 md:my-14 md:mx-10 w-[36rem]">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
           <TransparentButton onClick={() => onNavigateTo(undefined)}>
