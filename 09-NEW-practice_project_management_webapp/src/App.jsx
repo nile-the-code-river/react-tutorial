@@ -12,13 +12,30 @@ function App() {
     projects: [],
   });
 
-  function handleAddNewProject() {
-    console.log("1234");
+  console.log(projectState);
 
+  function handleAddNewProject() {
     setProjectState((prevState) => {
       return {
         ...prevState,
         selectedProjectId: null,
+      };
+    });
+  }
+
+  function handleSubmitNewProject(projectData) {
+    setProjectState((prevState) => {
+      const rndId = Math.random(1000);
+
+      const newProject = {
+        ...projectData,
+        id: rndId,
+      };
+
+      return {
+        ...prevState,
+        selectedProjectId: newProject.id,
+        projects: [...prevState.projects, newProject],
       };
     });
   }
@@ -29,8 +46,17 @@ function App() {
       {projectState.selectedProjectId === undefined && (
         <NoProjectSelected onClickNewProject={handleAddNewProject} />
       )}
-      {projectState.selectedProjectId === null && <NewProject />}
-      {projectState.selectedProjectId === 1 && <ProjectPage />}
+      {projectState.selectedProjectId === null && (
+        <NewProject onSubmitNewProject={handleSubmitNewProject} />
+      )}
+      {projectState.selectedProjectId != undefined &&
+        projectState.selectedProjectId != null && (
+          <ProjectPage
+            data={projectState.projects.find(
+              (x) => x.id == projectState.selectedProjectId
+            )}
+          />
+        )}
     </main>
   );
 }
