@@ -1,7 +1,17 @@
 import { useRef } from "react";
 
-export default function ProjectPage({ project, tasks, onAddNewTask }) {
-  const { title, description, dueDate } = project;
+import TransparentButton from "./TransparentButton";
+
+export default function ProjectPage({
+  project,
+  tasks,
+  onDeleteProject,
+  onAddNewTask,
+  onDeleteTask,
+}) {
+  console.log(tasks);
+
+  const { id, title, description, dueDate } = project;
   const taskInputRef = useRef();
 
   function handleSubmitNewTask() {
@@ -15,7 +25,9 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
         <h1 className="text-xl md:text-3xl font-bold text-stone-800 overflow-hidden">
           {title}
         </h1>
-        <button className="ml-auto hover:text-red-600 p-3">Delete</button>
+        <TransparentButton onClick={() => onDeleteProject(id)}>
+          Delete
+        </TransparentButton>
       </div>
       <p className="mb-5 text-stone-500">{dueDate}</p>
       <p className="mb-10 text-slate-700">{description}</p>
@@ -29,7 +41,7 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
           ref={taskInputRef}
         />
         <button
-          className="p-3 ml-1 self-center hover:text-red-600"
+          className="p-3 ml-1 self-center text-stone-600 hover:text-stone-950"
           onClick={handleSubmitNewTask}
         >
           Add
@@ -39,7 +51,10 @@ export default function ProjectPage({ project, tasks, onAddNewTask }) {
         <ul>
           {tasks.map((x) => (
             <li key={x.id} className="my-3">
-              {x.title}
+              <span>{x.title}</span>
+              <TransparentButton onClick={() => onDeleteTask(x.id)}>
+                Clear
+              </TransparentButton>
             </li>
           ))}
         </ul>
