@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import { createPortal } from "react-dom";
 
 import NoProjectSelected from "./components/NoProjectSelected";
 import NewProject from "./components/NewProject";
@@ -85,10 +84,7 @@ function App() {
 
   return (
     <>
-      {createPortal(
-        <Modal ref={modalRef} />,
-        document.getElementById("modal-root")
-      )}
+      <Modal ref={modalRef} />
 
       <main className="flex h-screen gap-3">
         <Sidebar
