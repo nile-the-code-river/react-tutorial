@@ -1,6 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 
 import Answer from "./Answer";
+import QuizTimer from "./QuizTimer";
 import { QuizContext } from "../store/QuizContextProvider";
 
 function getRandomIndexes() {
@@ -35,8 +36,6 @@ export default function Quiz({ onCompleteQuiz }) {
 
   const [currentQuiz, setCurrentQuiz] = useState(randomQuizzes[count]);
 
-  quizResult.map((x) => console.log(x.userAnswerIndex));
-
   function handlePickingAnswer(answerIndex) {
     setQuizResult((prev) => {
       const newResult = currentQuiz;
@@ -47,6 +46,10 @@ export default function Quiz({ onCompleteQuiz }) {
 
     count++;
   }
+  const handleSkipAnswer = useCallback(
+    () => handlePickingAnswer(null),
+    [handlePickingAnswer]
+  );
 
   useEffect(() => {
     if (randomQuizzes[count] === undefined) {
@@ -58,7 +61,7 @@ export default function Quiz({ onCompleteQuiz }) {
 
   return (
     <div id="quiz">
-      <progress />
+      {<QuizTimer timeout={5000} onTimerExpired={handleSkipAnswer} />}
       <div id="question">
         <h2>{currentQuiz.question}</h2>
       </div>
