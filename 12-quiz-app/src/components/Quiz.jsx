@@ -54,7 +54,7 @@ export default function Quiz({ onCompleteQuiz }) {
     } else {
       setCurrentQuiz((prev) => randomQuizzes[count]);
     }
-  }, [quizResult]);
+  }, [count]);
 
   return (
     <div id="quiz">

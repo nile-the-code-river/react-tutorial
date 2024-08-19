@@ -3,14 +3,22 @@ import React from "react";
 import completeImg from "../assets/quiz-complete.png";
 
 function Result({ result }) {
-  const correctAnswers = result.quizzes.filter(
+  const correctAnswerNum = result.quizzes.filter(
     (x) => x.userAnswerIndex === x.rightAnswerIndex
-  );
-  const wrongAnswers = result.quizzes.filter(
+  ).length;
+
+  const wrongAnswerNum = result.quizzes.filter(
     (x) => x.userAnswerIndex != x.rightAnswerIndex
-  );
-  const skippedAnswers = result.quizzes.filter(
+  ).length;
+
+  const skippedAnswerNum = result.quizzes.filter(
     (x) => x.userAnswerIndex === null
+  ).length;
+
+  const answerNum = correctAnswerNum + wrongAnswerNum + skippedAnswerNum;
+
+  console.log(
+    `${correctAnswerNum} ${wrongAnswerNum} ${skippedAnswerNum} ${answerNum}`
   );
 
   return (
@@ -19,15 +27,21 @@ function Result({ result }) {
       <h2>Quiz completed</h2>
       <div id="summary-stats">
         <p>
-          <span className="number">12%</span>
+          <span className="number">
+            {Math.floor((skippedAnswerNum / answerNum) * 100)}%
+          </span>
           <span className="text">skipped</span>
         </p>
         <p>
-          <span className="number">12%</span>
+          <span className="number">
+            {Math.floor((correctAnswerNum / answerNum) * 100)}%
+          </span>
           <span className="text">answered correctly</span>
         </p>
         <p>
-          <span className="number">12%</span>
+          <span className="number">
+            {Math.floor((wrongAnswerNum / answerNum) * 100)}%
+          </span>
           <span className="text">answered incorrectly</span>
         </p>
       </div>
