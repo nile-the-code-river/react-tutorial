@@ -26,19 +26,19 @@ function Result({ result }) {
           <span className="number">
             {Math.floor((skippedAnswerNum / answerNum) * 100)}%
           </span>
-          <span className="text">skipped</span>
+          <span className="text">Skipped</span>
         </p>
         <p>
           <span className="number">
             {Math.floor((correctAnswerNum / answerNum) * 100)}%
           </span>
-          <span className="text">answered correctly</span>
+          <span className="text">Answered Correctly</span>
         </p>
         <p>
           <span className="number">
             {Math.floor((wrongAnswerNum / answerNum) * 100)}%
           </span>
-          <span className="text">answered incorrectly</span>
+          <span className="text">Answered Incorrectly</span>
         </p>
       </div>
       <ol>
