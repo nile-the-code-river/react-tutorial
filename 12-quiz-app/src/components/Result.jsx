@@ -17,10 +17,6 @@ function Result({ result }) {
 
   const answerNum = correctAnswerNum + wrongAnswerNum + skippedAnswerNum;
 
-  console.log(
-    `${correctAnswerNum} ${wrongAnswerNum} ${skippedAnswerNum} ${answerNum}`
-  );
-
   return (
     <div id="summary">
       <img src={completeImg} alt="completed" />
