@@ -8,7 +8,7 @@ function Result({ result }) {
   ).length;
 
   const wrongAnswerNum = result.quizzes.filter(
-    (x) => x.userAnswerIndex != x.rightAnswerIndex
+    (x) => x.userAnswerIndex != x.rightAnswerIndex && x.userAnswerIndex != null
   ).length;
 
   const skippedAnswerNum = result.quizzes.filter(
@@ -47,14 +47,15 @@ function Result({ result }) {
             <h3>{index + 1}</h3>
             <p className="question">{quiz.question}</p>
             <p
-              className={
-                "user-answer " +
-                (quiz.userAnswerIndex === quiz.rightAnswerIndex
-                  ? "correct"
-                  : "wrong")
-              }
+              className={`user-answer ${
+                quiz.userAnswerIndex === quiz.rightAnswerIndex && "correct"
+              } ${quiz.userAnswerIndex === null && "skipped"} ${
+                quiz.userAnswerIndex != quiz.rightAnswerIndex &&
+                quiz.userAnswerIndex != null &&
+                "wrong"
+              }`}
             >
-              {quiz.answers[quiz.userAnswerIndex]}
+              {quiz.answers[quiz.rightAnswerIndex]}
             </p>
           </li>
         ))}
